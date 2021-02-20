@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SearchBar } from './components';
+import useStore from './hooks/useStore';
+import ViewModel from './ViewModel';
 
 function App() {
-  const handleSubmit = (value: string) => {
-    console.log('submitting query=', value)
-  }
+  const store = useStore();
+
+  const viewModel = new ViewModel(store)
+
   return (
     <Layout>
-      <h1>SearchBar</h1>
-      <SearchBar onSubmit={handleSubmit} />
+      <h1>Search Bar Demo</h1>
+      <SearchBar onSubmit={viewModel.handleSubmit} store={viewModel.store} />
     </Layout>
   );
 }
